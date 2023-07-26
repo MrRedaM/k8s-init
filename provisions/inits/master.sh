@@ -1,6 +1,8 @@
 #!/bin/bash
 
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.10.10.4
+echo "192.168.56.4 master" | sudo tee -a /etc/hosts
+
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.56.4
 
 mkdir -p $HOME/.kube
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install curl apt-transport-https -y
+sudo apt install curl apt-transport-https net-tools -y
 
 curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/k8s.gpg
 
