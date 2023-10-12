@@ -4,15 +4,15 @@ Vagrant.configure("2") do |config|
     master.vm.box = "ubuntu/focal64"
     master.vm.hostname = "master"
     master.vm.provider "virtualbox" do |vb|
-      vb.memory = 4096 # 4GB RAM
+      vb.cpus = 4
+      vb.memory = 6144 # 6GB RAM
       vb.gui = false
       vb.name = "master"
       #vb.customize ["modifyvm", :id, "--natnet1", "10.3/16"]
     end
-    master.vm.network "private_network", ip: "192.168.56.4"#, virtualbox__intnet: "TestNet"
-    master.vm.provision "shell", path: "provisions/inits/node.sh"
-    master.vm.provision "shell", path: "provisions/inits/master.sh"
-    master.vm.provision "shell", path: "provisions/installs/ksniff.sh"
+    master.vm.network "private_network", ip: "192.168.56.4"
+    master.vm.provision "shell", path: "provisions/node.sh"
+    master.vm.provision "shell", path: "provisions/master.sh"
   end
 
   # Worker node configuration
@@ -20,12 +20,13 @@ Vagrant.configure("2") do |config|
     worker.vm.box = "ubuntu/focal64"
     worker.vm.hostname = "worker"
     worker.vm.provider "virtualbox" do |vb|
-      vb.memory = 8192 # 8GB RAM
+      vb.cpus = 8
+      vb.memory = 10240 # 10GB RAM
       vb.gui = false
       vb.name = "worker"
     end
-    worker.vm.network "private_network", ip: "192.168.56.5"#, virtualbox__intnet: "TestNet"
-    worker.vm.provision "shell", path: "provisions/inits/node.sh"
-    worker.vm.provision "shell", path: "provisions/inits/worker.sh"
+    worker.vm.network "private_network", ip: "192.168.56.5"
+    worker.vm.provision "shell", path: "provisions/node.sh"
+    worker.vm.provision "shell", path: "provisions/worker.sh"
   end
 end
